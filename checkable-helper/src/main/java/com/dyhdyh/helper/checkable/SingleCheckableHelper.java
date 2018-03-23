@@ -9,9 +9,9 @@ package com.dyhdyh.helper.checkable;
 public class SingleCheckableHelper {
     private int mCheckedPosition = -1;
 
-    private CheckableAdapter mCheckableAdapter;
+    private SingleCheckableAdapter mCheckableAdapter;
 
-    public SingleCheckableHelper(CheckableAdapter checkableAdapter) {
+    public SingleCheckableHelper(SingleCheckableAdapter checkableAdapter) {
         this.mCheckableAdapter = checkableAdapter;
     }
 
