@@ -16,7 +16,6 @@ SingleCheckableHelper singleHelper = new SingleCheckableHelper(this);
 //设置position为选中，null则清除选中
 singleHelper.setCheckedPosition(position);
 
-
 //获取选中的position，null表示都没有选中
 Integer checkedPosition = singleHelper.getCheckedPosition();
 ```
@@ -27,7 +26,8 @@ Integer checkedPosition = singleHelper.getCheckedPosition();
 ```
 MultipleCheckableHelper multipleHelper = new MultipleCheckableHelper(this);
 
-//设置多个为checked multipleHelper.setCheckedPositionArray(position,checked);
+//设置多个为checked
+multipleHelper.setCheckedPositionArray(position,checked);
 
 //获取选中的position数组
 int[] positionArray = multipleHelper.getCheckedPositionArray();
