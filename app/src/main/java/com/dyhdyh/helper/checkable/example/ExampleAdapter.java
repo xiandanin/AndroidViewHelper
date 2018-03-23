@@ -7,17 +7,23 @@ import android.view.ViewGroup;
 import android.widget.CheckedTextView;
 import android.widget.TextView;
 
+import com.dyhdyh.helper.checkable.CheckableAdapter;
+import com.dyhdyh.helper.checkable.SingleCheckableHelper;
+
 import java.util.List;
 
 /**
  * @author dengyuhan
  *         created 2018/3/23 14:46
  */
-public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.Holder> {
+public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.Holder> implements CheckableAdapter {
     private List<ExampleModel> mData;
+
+    private SingleCheckableHelper mHelper;
 
     public ExampleAdapter(List<ExampleModel> data) {
         this.mData = data;
+        mHelper = new SingleCheckableHelper(this);
     }
 
     @Override
@@ -26,15 +32,38 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.Holder> 
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
+    public void onBindViewHolder(Holder holder, final int position) {
         ExampleModel model = mData.get(position);
         holder.tv_item_example.setText(model.getLabel());
         holder.ctv_item_example.setChecked(model.isChecked());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCheckedPosition(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    @Override
+    public void onChecked(int checkedPosition, boolean checked) {
+        mData.get(checkedPosition).setChecked(checked);
+        notifyItemChanged(checkedPosition);
+    }
+
+    @Override
+    public void setCheckedPosition(int checkedPosition) {
+        mHelper.setCheckedPosition(checkedPosition);
+    }
+
+    @Override
+    public int getCheckedPosition() {
+        return mHelper.getCheckedPosition();
     }
 
     static class Holder extends RecyclerView.ViewHolder {

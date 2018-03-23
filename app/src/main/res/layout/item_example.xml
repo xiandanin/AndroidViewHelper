@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="15dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="15dp">
 
     <TextView
         android:id="@+id/tv_item_example"
@@ -11,8 +11,8 @@
 
     <CheckedTextView
         android:id="@+id/ctv_item_example"
-        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:drawableLeft="@drawable/selector_checkable" />
 </RelativeLayout>

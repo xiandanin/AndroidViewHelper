@@ -16,16 +16,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        rv=findViewById(R.id.rv);
+        rv = findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        ExampleAdapter adapter=new ExampleAdapter(testData());
+        ExampleAdapter adapter = new ExampleAdapter(testData());
         rv.setAdapter(adapter);
     }
 
-    private List<String> testData() {
-        List<String> data=new ArrayList<>();
+    private List<ExampleModel> testData() {
+        List<ExampleModel> data = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
-            data.add("Item "+i);
+            data.add(new ExampleModel("Item " + i));
         }
         return data;
     }

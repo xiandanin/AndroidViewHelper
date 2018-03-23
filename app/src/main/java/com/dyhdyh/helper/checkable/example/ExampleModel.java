@@ -8,6 +8,10 @@ public class ExampleModel {
     private String label;
     private boolean checked;
 
+    public ExampleModel(String label) {
+        this.label = label;
+    }
+
     public String getLabel() {
         return label;
     }
