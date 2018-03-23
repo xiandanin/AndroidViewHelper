@@ -7,6 +7,7 @@ package com.dyhdyh.helper.checkable;
  */
 public interface SingleCheckableAdapter extends CheckableAdapter{
 
+
     void setCheckedPosition(Integer checkedPosition);
 
     Integer getCheckedPosition();

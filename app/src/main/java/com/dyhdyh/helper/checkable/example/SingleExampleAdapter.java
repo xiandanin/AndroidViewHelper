@@ -16,7 +16,7 @@ import java.util.List;
  * @author dengyuhan
  *         created 2018/3/23 14:46
  */
-public class SingleExampleAdapter extends BaseRecyclerAdapter<ExampleModel,SingleExampleAdapter.Holder> implements SingleCheckableAdapter {
+public class SingleExampleAdapter extends BaseRecyclerAdapter<ExampleModel, SingleExampleAdapter.Holder> implements SingleCheckableAdapter {
 
     private SingleCheckableHelper mSingleHelper;
 
@@ -34,19 +34,16 @@ public class SingleExampleAdapter extends BaseRecyclerAdapter<ExampleModel,Singl
     public void onBindViewHolder(Holder holder, final int position, ExampleModel item) {
         holder.tv_item_example.setText(item.getLabel());
         holder.ctv_item_example.setChecked(item.isChecked());
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSingleHelper.setCheckedPosition(position);
-            }
-        });
     }
 
     @Override
-    public void onChecked(int mode, int checkedPosition, boolean checked) {
+    public void onAdapterNotifyChanged(int[] checkedPositionArray) {
+        notifyItemChanged(checkedPositionArray[0]);
+    }
+
+    @Override
+    public void onChecked(int checkedPosition, boolean checked) {
         getData().get(checkedPosition).setChecked(checked);
-        notifyItemChanged(checkedPosition);
     }
 
     @Override

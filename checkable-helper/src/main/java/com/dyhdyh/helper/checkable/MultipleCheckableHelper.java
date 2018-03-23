@@ -1,7 +1,10 @@
 package com.dyhdyh.helper.checkable;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author dengyuhan
@@ -9,41 +12,63 @@ import java.util.List;
  */
 public class MultipleCheckableHelper<Data> implements CheckableHelper {
 
-    private List<Data> mCheckedData = new ArrayList<>();
-    private List<Integer> mCheckedPositionArray = new ArrayList<>();
-    private CheckableAdapter mCheckableAdapter;
+    private Map<Integer, Data> mCheckedData = new LinkedHashMap<>();
+    private MultipleCheckableAdapter<Data> mCheckableAdapter;
 
-    public MultipleCheckableHelper(CheckableAdapter checkableAdapter) {
+    public MultipleCheckableHelper(MultipleCheckableAdapter<Data> checkableAdapter) {
         this.mCheckableAdapter = checkableAdapter;
     }
 
-    public void setCheckedPosition(int checkedPosition, boolean checked) {
+    protected void setCheckedPosition(int checkedPosition, boolean checked) {
+        mCheckableAdapter.onChecked(checkedPosition, checked);
+        Data data = mCheckableAdapter.getItem(checkedPosition);
         if (checked) {
-            mCheckedPositionArray.add(checkedPosition);
+            mCheckedData.put(checkedPosition, data);
         } else {
-            mCheckedPositionArray.remove(Integer.valueOf(checkedPosition));
+            mCheckedData.remove(checkedPosition);
         }
-        mCheckableAdapter.onChecked(CheckableAdapter.MODE_MULTIPLE, checkedPosition, checked);
     }
 
     public void setCheckedPositionArray(int[] checkedPositionArray, boolean checked) {
         for (int position : checkedPositionArray) {
             setCheckedPosition(position, checked);
         }
+        mCheckableAdapter.onAdapterNotifyChanged(checkedPositionArray);
     }
 
 
-    public List<Integer> getCheckedPositionList() {
-        return mCheckedPositionArray;
+    public int[] getCheckedPositionArray() {
+        int[] positionArray = new int[mCheckedData.size()];
+        Set<Map.Entry<Integer, Data>> entries = mCheckedData.entrySet();
+        int index = 0;
+        for (Map.Entry<Integer, Data> entry : entries) {
+            positionArray[index] = entry.getKey();
+            index++;
+        }
+        return positionArray;
     }
 
 
-    public List<Data> getCheckedData() {
+    public List<Data> getCheckedList() {
+        List<Data> checkedList = new ArrayList<>();
+        Set<Map.Entry<Integer, Data>> entries = mCheckedData.entrySet();
+        for (Map.Entry<Integer, Data> entry : entries) {
+            checkedList.add(entry.getValue());
+        }
+        return checkedList;
+    }
+
+    public Map<Integer, Data> getCheckedData() {
         return mCheckedData;
     }
 
     public void clear() {
+        Set<Map.Entry<Integer, Data>> entries = mCheckedData.entrySet();
+        for (Map.Entry<Integer, Data> entry : entries) {
+            mCheckableAdapter.onChecked(entry.getKey(), false);
+        }
         mCheckedData.clear();
+        mCheckableAdapter.onAdapterNotifyChanged(new int[0]);
     }
 
 }

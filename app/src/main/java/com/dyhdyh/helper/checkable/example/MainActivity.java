@@ -43,11 +43,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickMenuMultiple(MenuItem menuItem) {
-        MultipleExampleAdapter exampleAdapter = new MultipleExampleAdapter(testData());
+        final MultipleExampleAdapter exampleAdapter = new MultipleExampleAdapter(testData());
         exampleAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener<ExampleModel>() {
             @Override
             public void onItemClick(BaseRecyclerAdapter recyclerAdapter, int position, ExampleModel item) {
-
+                ExampleModel model = exampleAdapter.getItem(position);
+                exampleAdapter.setCheckedPositionArray(new int[]{position}, !model.isChecked());
+                updateCheckedLog();
             }
         });
         rv.setAdapter(exampleAdapter);
@@ -69,15 +71,24 @@ public class MainActivity extends AppCompatActivity {
             sb.append("单选：");
             Integer checkedPosition = ((SingleExampleAdapter) adapter).getCheckedPosition();
             if (checkedPosition != null) {
-                sb.append("（Position = ");
+                sb.append("Position = ");
                 sb.append(checkedPosition);
                 sb.append(" = ");
                 ExampleModel item = ((SingleExampleAdapter) adapter).getData().get(checkedPosition);
                 sb.append(item.getLabel());
-                sb.append("）");
             }
         } else if (adapter instanceof MultipleExampleAdapter) {
-            sb.append("多选：");
+            sb.append("多选：\n");
+            int[] positionArray = ((MultipleExampleAdapter) adapter).getCheckedPositionArray();
+            for (int i = 0; i < positionArray.length; i++) {
+                ExampleModel item = ((MultipleExampleAdapter) adapter).getItem(positionArray[i]);
+                sb.append("Position = ");
+                sb.append(positionArray[i]);
+                sb.append(" = ");
+                sb.append(item.getLabel());
+                sb.append("\n");
+            }
+            sb.deleteCharAt(sb.length() - 1);
         }
         tv_log.setText(sb.toString());
     }

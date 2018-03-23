@@ -8,16 +8,21 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
-        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
-    <TextView
-        android:background="@color/colorBackground"
-        android:textColor="@color/colorAccent"
-        android:padding="10dp"
-        android:id="@+id/tv_log"
-        android:maxHeight="150dp"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackground"
+            android:padding="10dp"
+            android:textColor="@color/colorAccent" />
+    </RelativeLayout>
 </LinearLayout>

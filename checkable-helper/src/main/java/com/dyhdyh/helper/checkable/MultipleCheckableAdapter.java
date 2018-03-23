@@ -6,13 +6,13 @@ import java.util.List;
  * @author dengyuhan
  *         created 2018/3/23 15:05
  */
-public interface MultipleCheckableAdapter<Data> extends CheckableAdapter{
+public interface MultipleCheckableAdapter<Data> extends CheckableAdapter {
 
-    void onChecked(List<Data> checkedData, int checkedPosition, boolean checked);
+    Data getItem(int position);
 
     void setCheckedPositionArray(int[] checkedPositionArray, boolean checked);
 
-    List<Integer> getCheckedPositionList();
+    int[] getCheckedPositionArray();
 
-    List<Data> getCheckedData();
+    List<Data> getCheckedList();
 }

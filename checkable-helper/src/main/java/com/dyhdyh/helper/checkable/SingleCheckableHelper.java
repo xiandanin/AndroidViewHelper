@@ -10,9 +10,9 @@ public class SingleCheckableHelper implements CheckableHelper {
 
     private Integer mCheckedPosition;
 
-    private CheckableAdapter mCheckableAdapter;
+    private SingleCheckableAdapter mCheckableAdapter;
 
-    public SingleCheckableHelper(CheckableAdapter checkableAdapter) {
+    public SingleCheckableHelper(SingleCheckableAdapter checkableAdapter) {
         this.mCheckableAdapter = checkableAdapter;
     }
 
@@ -22,10 +22,12 @@ public class SingleCheckableHelper implements CheckableHelper {
     public void setCheckedPosition(Integer checkedPosition) {
         try {
             if (mCheckedPosition != null && mCheckedPosition >= 0) {
-                mCheckableAdapter.onChecked(CheckableAdapter.MODE_SINGLE, mCheckedPosition, false);
+                mCheckableAdapter.onChecked(mCheckedPosition, false);
+                mCheckableAdapter.onAdapterNotifyChanged(new int[]{mCheckedPosition});
             }
             this.mCheckedPosition = checkedPosition;
-            mCheckableAdapter.onChecked(CheckableAdapter.MODE_SINGLE, mCheckedPosition, true);
+            mCheckableAdapter.onChecked(mCheckedPosition, true);
+            mCheckableAdapter.onAdapterNotifyChanged(new int[]{mCheckedPosition});
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,8 +39,9 @@ public class SingleCheckableHelper implements CheckableHelper {
 
     @Override
     public void clear() {
-        if (mCheckedPosition >= 0) {
-            mCheckableAdapter.onChecked(CheckableAdapter.MODE_SINGLE, mCheckedPosition, false);
+        if (mCheckedPosition != null && mCheckedPosition >= 0) {
+            mCheckableAdapter.onChecked(mCheckedPosition, false);
+            mCheckableAdapter.onAdapterNotifyChanged(new int[]{mCheckedPosition});
         }
         this.mCheckedPosition = null;
     }
