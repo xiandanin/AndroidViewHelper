@@ -8,7 +8,7 @@ compile 'com.dyhdyh:checkable-helper:1.0.0'
 ```
 
 ### __单选Adapter__
-将自定义的Adapter实现`SingleCheckableAdapter`   
+将自定义的Adapter实现`SingleCheckableAdapter`，具体例子[SingleExampleAdapter](https://github.com/dengyuhan/CheckableHelper/blob/master/app/src/main/java/com/dyhdyh/helper/checkable/example/SingleExampleAdapter.java)   
 
 ```
 SingleCheckableHelper singleHelper = new SingleCheckableHelper(this);
@@ -21,7 +21,7 @@ Integer checkedPosition = singleHelper.getCheckedPosition();
 ```
 
 ### __多Adapter__
-将自定义的Adapter实现`MultipleCheckableAdapter`  
+将自定义的Adapter实现`MultipleCheckableAdapter`，具体例子[MultipleExampleAdapter](https://github.com/dengyuhan/CheckableHelper/blob/master/app/src/main/java/com/dyhdyh/helper/checkable/example/MultipleExampleAdapter.java)  
 
 ```
 MultipleCheckableHelper multipleHelper = new MultipleCheckableHelper(this);
