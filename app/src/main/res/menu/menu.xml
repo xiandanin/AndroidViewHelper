@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:onClick="clickMenuSingle"
+        android:title="单选" />
+    <item
+        android:onClick="clickMenuMultiple"
+        android:title="多选" />
+    <item
+        android:onClick="clickMenuClear"
+        android:title="清空 " />
+</menu>

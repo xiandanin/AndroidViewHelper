@@ -6,25 +6,40 @@ package com.dyhdyh.helper.checkable;
  * @author dengyuhan
  *         created 2018/3/23 14:23
  */
-public class SingleCheckableHelper {
-    private int mCheckedPosition = -1;
+public class SingleCheckableHelper implements CheckableHelper {
 
-    private SingleCheckableAdapter mCheckableAdapter;
+    private Integer mCheckedPosition;
 
-    public SingleCheckableHelper(SingleCheckableAdapter checkableAdapter) {
+    private CheckableAdapter mCheckableAdapter;
+
+    public SingleCheckableHelper(CheckableAdapter checkableAdapter) {
         this.mCheckableAdapter = checkableAdapter;
     }
 
-    public void setCheckedPosition(int checkedPosition) {
-        if (mCheckedPosition >= 0) {
-            mCheckableAdapter.onChecked(mCheckedPosition, false);
+    /**
+     * @param checkedPosition null代表清除
+     */
+    public void setCheckedPosition(Integer checkedPosition) {
+        try {
+            if (mCheckedPosition != null && mCheckedPosition >= 0) {
+                mCheckableAdapter.onChecked(CheckableAdapter.MODE_SINGLE, mCheckedPosition, false);
+            }
+            this.mCheckedPosition = checkedPosition;
+            mCheckableAdapter.onChecked(CheckableAdapter.MODE_SINGLE, mCheckedPosition, true);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        this.mCheckedPosition = checkedPosition;
-        mCheckableAdapter.onChecked(mCheckedPosition, true);
     }
 
-    public int getCheckedPosition() {
+    public Integer getCheckedPosition() {
         return mCheckedPosition;
     }
 
+    @Override
+    public void clear() {
+        if (mCheckedPosition >= 0) {
+            mCheckableAdapter.onChecked(CheckableAdapter.MODE_SINGLE, mCheckedPosition, false);
+        }
+        this.mCheckedPosition = null;
+    }
 }

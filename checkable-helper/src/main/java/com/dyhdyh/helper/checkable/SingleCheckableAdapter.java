@@ -5,11 +5,9 @@ package com.dyhdyh.helper.checkable;
  * @author dengyuhan
  *         created 2018/3/23 14:27
  */
-public interface SingleCheckableAdapter {
+public interface SingleCheckableAdapter extends CheckableAdapter{
 
-    void onChecked(int checkedPosition, boolean checked);
+    void setCheckedPosition(Integer checkedPosition);
 
-    void setCheckedPosition(int checkedPosition);
-
-    int getCheckedPosition();
+    Integer getCheckedPosition();
 }

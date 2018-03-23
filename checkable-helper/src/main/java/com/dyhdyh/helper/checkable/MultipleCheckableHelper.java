@@ -7,24 +7,28 @@ import java.util.List;
  * @author dengyuhan
  *         created 2018/3/23 15:06
  */
-public class MultipleCheckableHelper<Data> {
+public class MultipleCheckableHelper<Data> implements CheckableHelper {
 
     private List<Data> mCheckedData = new ArrayList<>();
     private List<Integer> mCheckedPositionArray = new ArrayList<>();
-    private MultipleCheckableAdapter<Data> mCheckableAdapter;
+    private CheckableAdapter mCheckableAdapter;
 
-    public MultipleCheckableHelper(MultipleCheckableAdapter checkableAdapter) {
+    public MultipleCheckableHelper(CheckableAdapter checkableAdapter) {
         this.mCheckableAdapter = checkableAdapter;
+    }
+
+    public void setCheckedPosition(int checkedPosition, boolean checked) {
+        if (checked) {
+            mCheckedPositionArray.add(checkedPosition);
+        } else {
+            mCheckedPositionArray.remove(Integer.valueOf(checkedPosition));
+        }
+        mCheckableAdapter.onChecked(CheckableAdapter.MODE_MULTIPLE, checkedPosition, checked);
     }
 
     public void setCheckedPositionArray(int[] checkedPositionArray, boolean checked) {
         for (int position : checkedPositionArray) {
-            if (checked) {
-                mCheckedPositionArray.add(Integer.valueOf(position));
-            } else {
-                mCheckedPositionArray.remove(Integer.valueOf(position));
-            }
-            mCheckableAdapter.onChecked(mCheckedData, position, checked);
+            setCheckedPosition(position, checked);
         }
     }
 
