@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/pb_loadmore"
+        style="@style/Base.Widget.AppCompat.ProgressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/pb_loadmore">
+
+        <TextView
+            android:id="@+id/tv_loadmore_symbol"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="6dp"
+            android:background="@drawable/recyclerview_helper_border_error_icon"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="!"
+            android:textColor="?attr/colorAccent"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_loadmore_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_loadmore_symbol"
+            android:singleLine="true"
+            android:textColor="?attr/colorAccent"
+            tools:text="@string/label_loading_footer_loading" />
+    </RelativeLayout>
+</RelativeLayout>

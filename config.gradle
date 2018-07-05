@@ -16,14 +16,14 @@ ext {
     jcenter =
             [
                     //项目名称
-                    name       : "CheckableHelper",
+                    name       : "RecyclerViewHelper",
                     groupId    : "com.dyhdyh",
                     //项目地址
-                    siteUrl    : "https://github.com/dengyuhan/CheckableHelper",
+                    siteUrl    : "https://github.com/dengyuhan/RecyclerViewHelper",
                     //项目git地址
-                    gitUrl     : "https://github.com/dengyuhan/CheckableHelper.git",
+                    gitUrl     : "https://github.com/dengyuhan/RecyclerViewHelper.git",
                     //项目描述
-                    description: "快速赋予Adapter单选/多选能力",
+                    description: "快速赋予Adapter单选/多选/加载更多能力",
                     //开发者的一些基本信息
                     authorId   : "dengyuhan",
                     authorName : "dengyuhan",

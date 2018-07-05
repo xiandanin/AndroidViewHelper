@@ -1,1 +1,1 @@
-include ':app', ':checkable-helper'
+include ':app', ':recyclerview-helper'

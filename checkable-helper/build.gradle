@@ -1,7 +1,0 @@
-apply plugin: 'com.android.library'
-apply from: "bintray.gradle"
-
-dependencies {
-    provided 'com.android.support:recyclerview-v7:26.1.0'
-    provided 'com.android.support:appcompat-v7:26.1.0'
-}

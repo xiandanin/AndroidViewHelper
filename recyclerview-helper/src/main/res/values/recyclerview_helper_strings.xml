@@ -1,0 +1,5 @@
+<resources>
+    <string name="label_loading_footer_loading">加载中...</string>
+    <string name="label_loading_footer_error">上拉重新加载</string>
+    <string name="label_loading_footer_end">^__^&#160;&#160;&#160;&#160;已经到底了哦</string>
+</resources>
