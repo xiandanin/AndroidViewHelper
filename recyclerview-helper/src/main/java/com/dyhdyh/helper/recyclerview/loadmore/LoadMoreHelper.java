@@ -3,19 +3,17 @@ package com.dyhdyh.helper.recyclerview.loadmore;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-import com.alibaba.android.vlayout.DelegateAdapter;
-import com.dyhdyh.helper.recyclerview.loadmore.valyout.LoadMoreVLayoutAdapter;
-
 /**
  * @author dengyuhan
  *         created 2018/7/4 14:34
  */
 public class LoadMoreHelper {
-    private RecyclerView mRecyclerView;
+    protected RecyclerView mRecyclerView;
 
-    private LoadMoreView mLoadMoreView;
-    private LoadMoreDelegateAdapter.Delegate mDelegateAdapter;
+    protected LoadMoreView mLoadMoreView;
     private OnLoadMoreScrollListener mScrollListener;
+
+    private LoadMoreAdapter mLoadMoreAdapter;
 
     public LoadMoreHelper(RecyclerView recyclerView) {
         this.mRecyclerView = recyclerView;
@@ -45,29 +43,20 @@ public class LoadMoreHelper {
     }
 
     public void setAdapter(RecyclerView.Adapter adapter) {
-        LoadMoreAdapter loadMoreAdapter = new LoadMoreAdapter(adapter, mLoadMoreView);
-        mDelegateAdapter = loadMoreAdapter;
-
-        mRecyclerView.setAdapter(loadMoreAdapter);
+        mLoadMoreAdapter= new LoadMoreAdapter(adapter, mLoadMoreView);
+        mRecyclerView.setAdapter(mLoadMoreAdapter);
     }
 
-    public void setAdapter(DelegateAdapter adapter) {
-        LoadMoreVLayoutAdapter loadMoreAdapter = new LoadMoreVLayoutAdapter(mLoadMoreView);
-        mDelegateAdapter = loadMoreAdapter;
-
-        adapter.addAdapter(loadMoreAdapter);
-        mRecyclerView.setAdapter(adapter);
-    }
 
     public void setLoadMoreState(int state) {
-        if (mDelegateAdapter != null) {
-            mDelegateAdapter.setLoadMoreState(state);
+        if (mLoadMoreAdapter != null) {
+            mLoadMoreAdapter.setLoadMoreState(state);
         }
     }
 
     public int getLoadMoreState() {
-        if (mDelegateAdapter != null) {
-            return mDelegateAdapter.getLoadMoreState();
+        if (mLoadMoreAdapter != null) {
+            return mLoadMoreAdapter.getLoadMoreState();
         }
         return LoadMoreView.GONE;
     }

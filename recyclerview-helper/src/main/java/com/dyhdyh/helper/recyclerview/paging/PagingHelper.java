@@ -18,6 +18,7 @@ public abstract class PagingHelper implements Pagination<Integer> {
     public PagingHelper(int startPage, int pageCount) {
         this.mStartPage = startPage;
         this.mPageCount = pageCount;
+        this.resetPage();
     }
 
     @Override
@@ -40,4 +41,7 @@ public abstract class PagingHelper implements Pagination<Integer> {
         mPage = mStartPage;
     }
 
+    public int getStartPage() {
+        return mStartPage;
+    }
 }
