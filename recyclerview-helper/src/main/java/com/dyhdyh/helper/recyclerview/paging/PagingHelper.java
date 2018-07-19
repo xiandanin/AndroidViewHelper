@@ -22,6 +22,11 @@ public abstract class PagingHelper implements Pagination<Integer> {
     }
 
     @Override
+    public boolean isFirst() {
+        return mPage == mStartPage;
+    }
+
+    @Override
     public Integer getPage() {
         return mPage;
     }
@@ -41,7 +46,8 @@ public abstract class PagingHelper implements Pagination<Integer> {
         mPage = mStartPage;
     }
 
-    public int getStartPage() {
+    @Override
+    public Integer getStartPage() {
         return mStartPage;
     }
 }
