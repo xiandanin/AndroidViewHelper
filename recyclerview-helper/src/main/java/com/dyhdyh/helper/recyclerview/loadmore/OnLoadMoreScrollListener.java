@@ -18,6 +18,7 @@ public class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
     public static final int DEFAULT_AUTOLOAD_COUNT = 1;
 
     private boolean mLoadMoreCompleted = true;
+    private boolean mLoadMoreEnable = true;
 
     private int mEarlyCountForAutoLoad;
     private OnLoadMoreListener mLoadMoreListener;
@@ -35,8 +36,10 @@ public class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
     }
 
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-        if (RecyclerView.SCROLL_STATE_IDLE == newState) {
-            callScrollLoadMore(recyclerView);
+        if (mLoadMoreEnable){
+            if (RecyclerView.SCROLL_STATE_IDLE == newState) {
+                callScrollLoadMore(recyclerView);
+            }
         }
     }
 
@@ -86,5 +89,9 @@ public class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
 
     public void setLoadMoreCompleted() {
         this.mLoadMoreCompleted = true;
+    }
+
+    public void setLoadMoreEnable(boolean enable) {
+        this.mLoadMoreEnable = enable;
     }
 }

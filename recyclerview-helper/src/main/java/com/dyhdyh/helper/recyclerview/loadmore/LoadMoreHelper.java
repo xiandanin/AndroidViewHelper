@@ -61,6 +61,11 @@ public class LoadMoreHelper {
         return LoadMoreView.GONE;
     }
 
+
+    public void setLoadMoreEnable(boolean enable) {
+        this.mScrollListener.setLoadMoreEnable(enable);
+    }
+
     public OnLoadMoreScrollListener getScrollListener() {
         return mScrollListener;
     }
