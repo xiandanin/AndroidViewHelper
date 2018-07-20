@@ -22,21 +22,16 @@ public class VLayoutLoadMoreHelper extends LoadMoreHelper {
 
     @Override
     public void setAdapter(RecyclerView.Adapter adapter) {
-        LoadMoreAdapter loadMoreAdapter = new LoadMoreAdapter(adapter, mLoadMoreView);
-        mDelegateAdapter = loadMoreAdapter;
+        if (adapter instanceof DelegateAdapter) {
+            LoadMoreVLayoutAdapter loadMoreAdapter = new LoadMoreVLayoutAdapter(mLoadMoreView);
+            mDelegateAdapter = loadMoreAdapter;
+            ((DelegateAdapter) adapter).addAdapter(loadMoreAdapter);
+        } else {
+            mDelegateAdapter = new LoadMoreAdapter(adapter, mLoadMoreView);
+        }
 
-        mRecyclerView.setAdapter(loadMoreAdapter);
-    }
-
-
-    public void setAdapter(DelegateAdapter adapter) {
-        LoadMoreVLayoutAdapter loadMoreAdapter = new LoadMoreVLayoutAdapter(mLoadMoreView);
-        mDelegateAdapter = loadMoreAdapter;
-
-        adapter.addAdapter(loadMoreAdapter);
         mRecyclerView.setAdapter(adapter);
     }
-
 
     @Override
     public void setLoadMoreState(int state) {

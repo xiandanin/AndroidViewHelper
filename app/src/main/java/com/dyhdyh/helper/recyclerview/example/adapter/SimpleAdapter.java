@@ -1,4 +1,4 @@
-package com.dyhdyh.helper.recyclerview.example;
+package com.dyhdyh.helper.recyclerview.example.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.dyhdyh.helper.recyclerview.example.R;
 
 import java.util.List;
 
@@ -41,6 +42,10 @@ public class SimpleAdapter extends DelegateAdapter.Adapter<SimpleAdapter.ItemHol
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    public List<String> getData() {
+        return mData;
     }
 
     public void addAll(List<String> list) {

@@ -22,10 +22,4 @@ public interface Pagination<Page> {
 
     void resetPage();
 
-    /**
-     * 是否最后一页
-     *
-     * @return true表示最后一页
-     */
-    boolean isLast();
 }

@@ -43,7 +43,7 @@ public class LoadMoreHelper {
     }
 
     public void setAdapter(RecyclerView.Adapter adapter) {
-        mLoadMoreAdapter= new LoadMoreAdapter(adapter, mLoadMoreView);
+        mLoadMoreAdapter = new LoadMoreAdapter(adapter, mLoadMoreView);
         mRecyclerView.setAdapter(mLoadMoreAdapter);
     }
 

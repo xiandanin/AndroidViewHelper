@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBackground">#EEEEEE</color>
+    <color name="colorDivider">#EAEAEA</color>
+    <color name="colorText">#333333</color>
 </resources>

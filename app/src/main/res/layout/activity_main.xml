@@ -1,28 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
+    <Button
+        android:onClick="clickChecked"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content"
+        android:text="多选/单选" />
 
-
-    <RelativeLayout
+    <Button
+        android:onClick="clickLoadMore"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="加载更多" />
 
-        <TextView
-            android:id="@+id/tv_log"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBackground"
-            android:padding="10dp"
-            android:textColor="@color/colorAccent" />
-    </RelativeLayout>
+    <Button
+        android:onClick="clickAutoPlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="滚动自动播放" />
 </LinearLayout>

@@ -32,7 +32,9 @@ public class LoadMoreDelegateAdapter {
 
     public void setLoadMoreState(int state) {
         this.mState = state;
-        this.mLoadMoreView.setLoadMoreState(mState);
+        if (mLoadMoreView != null) {
+            this.mLoadMoreView.setLoadMoreState(mState);
+        }
     }
 
     public int getLoadMoreState() {

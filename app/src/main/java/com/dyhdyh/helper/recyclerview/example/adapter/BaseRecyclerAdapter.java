@@ -1,4 +1,4 @@
-package com.dyhdyh.helper.recyclerview.example;
+package com.dyhdyh.helper.recyclerview.example.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

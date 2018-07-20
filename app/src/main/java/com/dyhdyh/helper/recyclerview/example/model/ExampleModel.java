@@ -1,4 +1,4 @@
-package com.dyhdyh.helper.recyclerview.example;
+package com.dyhdyh.helper.recyclerview.example.model;
 
 /**
  * @author dengyuhan

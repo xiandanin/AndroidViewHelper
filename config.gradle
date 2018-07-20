@@ -2,41 +2,47 @@ ext {
     android =
             [
                     //版本号
-                    versionCode      : 6,
-                    versionName      : "1.0.0-beta5",
+                    versionCode          : 10,
+                    versionName          : "1.0.0-beta9",
+                    //ViewHelper版本号
+                    viewHelperVersionCode: 1,
+                    viewHelperVersionName: "1.0.0",
 
                     //sdk版本
-                    compileSdkVersion: 26,
-                    buildToolsVersion: "26.0.2",
-                    minSdkVersion    : 14,
-                    targetSdkVersion : 26,
-                    supportVersion   : "26.1.0",
+                    compileSdkVersion    : 26,
+                    buildToolsVersion    : "26.0.2",
+                    minSdkVersion        : 19,
+                    targetSdkVersion     : 26,
+                    supportVersion       : "26.1.0",
             ]
 
     jcenter =
             [
                     //项目名称
-                    name       : "RecyclerViewHelper",
-                    groupId    : "com.dyhdyh",
+                    name                 : "RecyclerViewHelper",
+                    viewHelperName       : "AndroidViewHelper",
+                    groupId              : "com.dyhdyh",
                     //项目地址
-                    siteUrl    : "https://github.com/dengyuhan/RecyclerViewHelper",
+                    siteUrl              : "https://github.com/dengyuhan/AndroidViewHelper",
                     //项目git地址
-                    gitUrl     : "https://github.com/dengyuhan/RecyclerViewHelper.git",
+                    gitUrl               : "https://github.com/dengyuhan/AndroidViewHelper.git",
                     //项目描述
-                    description: "快速赋予Adapter单选/多选/加载更多能力",
+                    description          : "快速赋予Adapter单选/多选/加载更多能力",
+                    //项目描述
+                    viewHelperDescription: "提供了View的一系列辅助",
                     //开发者的一些基本信息
-                    authorId   : "dengyuhan",
-                    authorName : "dengyuhan",
-                    authorEmail: "22309946@qq.com",
+                    authorId             : "dengyuhan",
+                    authorName           : "dengyuhan",
+                    authorEmail          : "22309946@qq.com",
 
                     //开源协议
-                    licenses   : {
+                    licenses             : {
                         license {
                             name 'MIT'
                             url 'https://opensource.org/licenses/MIT'
                         }
                     },
-                    licenseName: 'MIT'
+                    licenseName          : 'MIT'
             ]
 
 
