@@ -1,7 +1,7 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-version = rootProject.ext.android.versionName
+version = rootProject.ext.android.viewHelperVersionName
 group = rootProject.ext.jcenter.groupId
 
 android {

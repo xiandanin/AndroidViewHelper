@@ -39,3 +39,32 @@ List<Object> checkedList = multipleHelper.getCheckedList();
 multipleHelper.clear();;
 
 ```
+
+### RecyclerViewVisibleHelper
+可以获取RecyclerView中子View的可见信息
+
+```
+RecyclerViewVisibleHelper mHelper = new RecyclerViewVisibleHelper(new RecyclerViewVisibleHelper.ViewVisibleCallback() {
+    @Override
+    public View getItemTargetView(View itemView) {
+        //return你需要的子View可见信息 如果需要整个Item,则直接return itemView
+        //return itemView.findViewById(R.id.video);
+        return itemView;
+    }
+});
+final List<ViewVisibleInfo> visibleInfo = mHelper.getLocalVisibleInfo(recyclerView);
+```
+
+### OnAutoPlayScrollListener
+列表自动播放Listener
+
+```
+//自动播放
+recyclerView.addOnScrollListener(new OnAutoPlayScrollListener(mHelper) {
+    @Override
+    public void startPlay(View itemView) {
+        VideoView player = itemView.findViewById(R.id.video);
+        player.start();
+    }
+});
+```

@@ -11,6 +11,7 @@ import com.dyhdyh.widget.loading.bar.LoadingBar;
 import java.util.List;
 
 /**
+ * 刷新加载更多
  * @author dengyuhan
  *         created 2018/7/20 14:11
  */
