@@ -121,7 +121,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
         final int adapterPosition = holder.getAdapterPosition();
-        if (adapterPosition < 0) {
+        if (adapterPosition >= 0) {
             if (TYPE_LOADMORE_VIEW == getItemViewType(adapterPosition)) {
                 setLoadMoreViewParams(holder);
             } else {
@@ -133,7 +133,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
         final int adapterPosition = holder.getAdapterPosition();
-        if (adapterPosition < 0) {
+        if (adapterPosition >= 0) {
             if (TYPE_LOADMORE_VIEW == getItemViewType(adapterPosition)) {
                 setLoadMoreViewParams(holder);
             } else {
@@ -145,7 +145,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onViewRecycled(RecyclerView.ViewHolder holder) {
         final int adapterPosition = holder.getAdapterPosition();
-        if (adapterPosition < 0) {
+        if (adapterPosition >= 0) {
             if (TYPE_LOADMORE_VIEW == getItemViewType(adapterPosition)) {
                 setLoadMoreViewParams(holder);
             } else {
