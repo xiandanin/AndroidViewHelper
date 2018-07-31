@@ -15,6 +15,7 @@ public class LoadMoreHelper {
 
     private LoadMoreAdapter mLoadMoreAdapter;
 
+
     public LoadMoreHelper(RecyclerView recyclerView) {
         this.mRecyclerView = recyclerView;
         //自动计算earlyCountForAutoLoad
@@ -25,9 +26,14 @@ public class LoadMoreHelper {
         } else {
             earlyCountForAutoLoad = OnLoadMoreScrollListener.DEFAULT_AUTOLOAD_COUNT;
         }
-
-        mScrollListener = new OnLoadMoreScrollListener(earlyCountForAutoLoad);
+        mScrollListener = new OnLoadMoreScrollListener();
+        mScrollListener.setEarlyCountForAutoLoad(earlyCountForAutoLoad);
         mRecyclerView.addOnScrollListener(mScrollListener);
+    }
+
+
+    public void setEarlyCountForAutoLoad(int earlyCountForAutoLoad) {
+        mScrollListener.setEarlyCountForAutoLoad(earlyCountForAutoLoad);
     }
 
     public void setLoadMoreView(LoadMoreView loadMoreView) {

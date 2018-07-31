@@ -76,6 +76,7 @@ javadoc {
         links "http://docs.oracle.com/javase/8/docs/api"
     }
 }
+/*
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 bintray {
@@ -90,4 +91,4 @@ bintray {
         licenses = [rootProject.ext.jcenter.licenseName]
         publish = true
     }
-}
+}*/

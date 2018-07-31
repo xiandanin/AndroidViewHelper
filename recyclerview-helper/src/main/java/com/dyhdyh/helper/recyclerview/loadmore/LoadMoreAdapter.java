@@ -115,29 +115,38 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        /*
         if (TYPE_LOADMORE_VIEW == getItemViewType(holder.getAdapterPosition())) {
             setLoadMoreViewParams(holder);
         } else {
             mInnerAdapter.onViewAttachedToWindow(holder);
         }
+        */
+        mInnerAdapter.onViewAttachedToWindow(holder);
     }
 
     @Override
     public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
-        if (TYPE_LOADMORE_VIEW == getItemViewType(holder.getAdapterPosition())) {
+        /*
+        if (TYPE_LOADMORE_VIEW == getItemViewType(holder.getLayoutPosition())) {
             setLoadMoreViewParams(holder);
         } else {
             mInnerAdapter.onViewDetachedFromWindow(holder);
         }
+        */
+        mInnerAdapter.onViewDetachedFromWindow(holder);
     }
 
     @Override
     public void onViewRecycled(RecyclerView.ViewHolder holder) {
-        if (TYPE_LOADMORE_VIEW == getItemViewType(holder.getAdapterPosition())) {
+        /*
+        if (TYPE_LOADMORE_VIEW == getItemViewType(holder.getLayoutPosition())) {
             setLoadMoreViewParams(holder);
         } else {
             mInnerAdapter.onViewRecycled(holder);
         }
+        */
+        mInnerAdapter.onViewRecycled(holder);
     }
 
     @Override

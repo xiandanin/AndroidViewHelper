@@ -3,7 +3,6 @@ package com.dyhdyh.helper.recyclerview.loadmore;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 
@@ -20,14 +19,11 @@ public class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
     private boolean mLoadMoreCompleted = true;
     private boolean mLoadMoreEnable = true;
 
-    private int mEarlyCountForAutoLoad;
+    private int mEarlyCountForAutoLoad = DEFAULT_AUTOLOAD_COUNT;
     private OnLoadMoreListener mLoadMoreListener;
 
-    public OnLoadMoreScrollListener() {
-        this(DEFAULT_AUTOLOAD_COUNT);
-    }
 
-    public OnLoadMoreScrollListener(int earlyCountForAutoLoad) {
+    public void setEarlyCountForAutoLoad(int earlyCountForAutoLoad) {
         this.mEarlyCountForAutoLoad = earlyCountForAutoLoad;
     }
 
@@ -36,15 +32,17 @@ public class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
     }
 
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-        if (mLoadMoreEnable){
+        /*if (mLoadMoreEnable){
             if (RecyclerView.SCROLL_STATE_IDLE == newState) {
                 callScrollLoadMore(recyclerView);
             }
-        }
+        }*/
     }
 
     public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-        //callScrollLoadMore(recyclerView);
+        if (mLoadMoreEnable) {
+            callScrollLoadMore(recyclerView);
+        }
     }
 
     private void callScrollLoadMore(RecyclerView recyclerView) {
@@ -66,7 +64,7 @@ public class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
             total = getItemCount(recyclerView.getAdapter());
             if (!onIntercept(recyclerView, last, total)) {
                 //earlyCountForAutoLoad: help to trigger load more listener earlier
-                Log.d("-------------->", first + " " + last + " " + total);
+                //Log.d("-------------->", first + " " + last + " " + total);
                 mLoadMoreCompleted = false;
                 mLoadMoreListener.onLoadMore();
             }

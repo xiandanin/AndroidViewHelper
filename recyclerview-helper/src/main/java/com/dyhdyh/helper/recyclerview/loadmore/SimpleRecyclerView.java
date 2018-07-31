@@ -196,10 +196,12 @@ public class SimpleRecyclerView extends RelativeLayout implements Pagination<Int
 
     public void setLoadMoreState(int state) {
         if (mLoadMoreHelper != null) {
-            mLoadMoreHelper.setLoadMoreState(state);
             if (LoadMoreView.THE_END == state) {
                 mLoadMoreHelper.setLoadMoreEnable(false);
+            }else{
+                mLoadMoreHelper.setLoadMoreEnable(true);
             }
+            mLoadMoreHelper.setLoadMoreState(state);
         }
     }
 

@@ -35,8 +35,17 @@ public class SimpleAdapter extends DelegateAdapter.Adapter<SimpleAdapter.ItemHol
     }
 
     @Override
-    public void onBindViewHolder(ItemHolder holder, int position) {
+    public void onBindViewHolder(ItemHolder holder, final int position) {
         holder.tv.setText(mData.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mData.remove(position);
+                notifyItemRemoved(position);
+                notifyItemRangeChanged(position, getData().size() - position);
+            }
+        });
     }
 
     @Override

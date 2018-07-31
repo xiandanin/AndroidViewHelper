@@ -57,30 +57,30 @@ public class LoadMoreActivity extends AppCompatActivity {
 
     private void asyncTestData() {
         asyncTestDataObservable(rv.getPage())
-.subscribe(new TestPagingObserver(findViewById(R.id.content_view), rv, "出错了") {
-    @Override
-    protected void onRefreshResponse(List<String> response, List<String> list) {
-        rv.setLayoutManager(new LinearLayoutManager(LoadMoreActivity.this));
-        mAdapter = new SimpleAdapter(response);
-        rv.setAdapter(mAdapter);
-    }
+                .subscribe(new TestPagingObserver(findViewById(R.id.content_view), rv, "出错了") {
+                    @Override
+                    protected void onRefreshResponse(List<String> response, List<String> list) {
+                        rv.setLayoutManager(new LinearLayoutManager(LoadMoreActivity.this));
+                        mAdapter = new SimpleAdapter(response);
+                        rv.setAdapter(mAdapter);
+                    }
 
-    @Override
-    protected void onAppendResponse(List<String> response, List<String> list) {
-        mAdapter.addAll(response);
-    }
+                    @Override
+                    protected void onAppendResponse(List<String> response, List<String> list) {
+                        mAdapter.addAll(response);
+                    }
 
-    @Override
-    protected boolean isLast(List<String> response) {
-        //假设第三页就是最后一页
-        return rv.getPage() == 3;
-    }
+                    @Override
+                    protected boolean isLast(List<String> response) {
+                        //假设第三页就是最后一页
+                        return rv.getPage() == 3;
+                    }
 
-    @Override
-    public void onClickErrorLayout(View errorLayout) {
-        asyncTestData();
-    }
-});
+                    @Override
+                    public void onClickErrorLayout(View errorLayout) {
+                        asyncTestData();
+                    }
+                });
 
     }
 
