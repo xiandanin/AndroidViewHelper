@@ -2,8 +2,8 @@ ext {
     android =
             [
                     //版本号
-                    versionCode          : 12,
-                    versionName          : "1.0.0-beta11",
+                    versionCode          : 14,
+                    versionName          : "1.0.0-beta13",
                     //ViewHelper版本号
                     viewHelperVersionCode: 1,
                     viewHelperVersionName: "1.0.0",

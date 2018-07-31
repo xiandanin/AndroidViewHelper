@@ -100,7 +100,12 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public boolean onFailedToRecycleView(RecyclerView.ViewHolder holder) {
-        return mInnerAdapter.onFailedToRecycleView(holder);
+        final int adapterPosition = holder.getAdapterPosition();
+        if (adapterPosition < 0 || TYPE_LOADMORE_VIEW == getItemViewType(holder.getLayoutPosition())) {
+            return super.onFailedToRecycleView(holder);
+        } else {
+            return mInnerAdapter.onFailedToRecycleView(holder);
+        }
     }
 
     @Override
@@ -115,38 +120,38 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
-        /*
-        if (TYPE_LOADMORE_VIEW == getItemViewType(holder.getAdapterPosition())) {
-            setLoadMoreViewParams(holder);
-        } else {
-            mInnerAdapter.onViewAttachedToWindow(holder);
+        final int adapterPosition = holder.getAdapterPosition();
+        if (adapterPosition < 0) {
+            if (TYPE_LOADMORE_VIEW == getItemViewType(adapterPosition)) {
+                setLoadMoreViewParams(holder);
+            } else {
+                mInnerAdapter.onViewAttachedToWindow(holder);
+            }
         }
-        */
-        mInnerAdapter.onViewAttachedToWindow(holder);
     }
 
     @Override
     public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
-        /*
-        if (TYPE_LOADMORE_VIEW == getItemViewType(holder.getLayoutPosition())) {
-            setLoadMoreViewParams(holder);
-        } else {
-            mInnerAdapter.onViewDetachedFromWindow(holder);
+        final int adapterPosition = holder.getAdapterPosition();
+        if (adapterPosition < 0) {
+            if (TYPE_LOADMORE_VIEW == getItemViewType(adapterPosition)) {
+                setLoadMoreViewParams(holder);
+            } else {
+                mInnerAdapter.onViewDetachedFromWindow(holder);
+            }
         }
-        */
-        mInnerAdapter.onViewDetachedFromWindow(holder);
     }
 
     @Override
     public void onViewRecycled(RecyclerView.ViewHolder holder) {
-        /*
-        if (TYPE_LOADMORE_VIEW == getItemViewType(holder.getLayoutPosition())) {
-            setLoadMoreViewParams(holder);
-        } else {
-            mInnerAdapter.onViewRecycled(holder);
+        final int adapterPosition = holder.getAdapterPosition();
+        if (adapterPosition < 0) {
+            if (TYPE_LOADMORE_VIEW == getItemViewType(adapterPosition)) {
+                setLoadMoreViewParams(holder);
+            } else {
+                mInnerAdapter.onViewRecycled(holder);
+            }
         }
-        */
-        mInnerAdapter.onViewRecycled(holder);
     }
 
     @Override
