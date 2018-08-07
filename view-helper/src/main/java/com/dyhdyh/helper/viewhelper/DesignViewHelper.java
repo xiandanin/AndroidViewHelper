@@ -4,6 +4,7 @@ import android.support.annotation.ColorRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -59,15 +60,25 @@ public class DesignViewHelper {
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (verticalOffset >= 0) {
-                    refreshLayout.setEnabled(true);
-                } else {
-                    refreshLayout.setEnabled(false);
-                }
+                refreshLayout.setEnabled(verticalOffset >= 0);
             }
         });
     }
 
+    /**
+     * SwipeRefreshLayout嵌套ViewPager
+     *
+     * @param refreshLayout
+     * @param viewPager
+     */
+    public static void nestedSwipeViewPager(final SwipeRefreshLayout refreshLayout, ViewPager viewPager) {
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                refreshLayout.setEnabled(positionOffset == 0f);
+            }
+        });
+    }
 
     /**
      * 滚动RecyclerView
