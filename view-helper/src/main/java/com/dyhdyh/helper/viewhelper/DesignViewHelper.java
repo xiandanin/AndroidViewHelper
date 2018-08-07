@@ -14,6 +14,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewParent;
 
+import com.dyhdyh.helper.viewhelper.listener.OnNestedAppBarViewPagerListener;
+
 /**
  * Material Design
  *
@@ -76,6 +78,35 @@ public class DesignViewHelper {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 refreshLayout.setEnabled(positionOffset == 0f);
+            }
+        });
+    }
+
+    /**
+     * SwipeRefreshLayout同时嵌套appbar和ViewPager
+     *
+     * @param refreshLayout
+     * @param appBarLayout
+     * @param viewPager
+     */
+    public static void nestedSwipeAppBarViewPager(final SwipeRefreshLayout refreshLayout, AppBarLayout appBarLayout, ViewPager viewPager) {
+        NestedAppBarViewPagerHelper helper = new NestedAppBarViewPagerHelper(appBarLayout, viewPager);
+        helper.setNestedListener(new OnNestedAppBarViewPagerListener() {
+            @Override
+            public void onNestedChanged(AppBarLayout appBarLayout, int verticalOffset, ViewPager viewPager, float positionOffset) {
+                refreshLayout.setEnabled(verticalOffset >= 0 && positionOffset == 0);
+            }
+        });
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                helper.setVerticalOffset(verticalOffset);
+            }
+        });
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                helper.setPositionOffset(positionOffset);
             }
         });
     }
