@@ -53,20 +53,14 @@ public class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
             final RecyclerView.LayoutManager lm = recyclerView.getLayoutManager();
             //如果callback是空 就通过LayoutManager获取最后显示的索引
             if (mFindCallback == null) {
-                if (lm instanceof LinearLayoutManager) {
-                    //first = ((LinearLayoutManager) lm).findFirstVisibleItemPosition();
-                    last = ((LinearLayoutManager) lm).findLastVisibleItemPosition();
-                } else if (lm instanceof StaggeredGridLayoutManager) {
-                    //final int[] firstPositions = ((StaggeredGridLayoutManager) lm).findFirstCompletelyVisibleItemPositions(null);
-                    //Arrays.sort(firstPositions);
-                    //first = firstPositions[0];
-                    final int[] lastPositions = ((StaggeredGridLayoutManager) lm).findLastVisibleItemPositions(null);
-                    Arrays.sort(lastPositions);
-                    last = lastPositions[lastPositions.length - 1];
-                }
+                last = findLastVisibleItemPosition(lm);
             } else {
                 //不是空就通过callback获取最后显示的索引
                 last = mFindCallback.findLastVisibleItemPosition(lm);
+                //如果是-1 就用默认方式再查一遍
+                if (last == -1) {
+                    last = findLastVisibleItemPosition(lm);
+                }
             }
 
             total = getItemCount(recyclerView.getAdapter());
@@ -76,6 +70,22 @@ public class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
                 mLoadMoreCompleted = false;
                 mLoadMoreListener.onLoadMore();
             }
+        }
+    }
+
+    protected int findLastVisibleItemPosition(RecyclerView.LayoutManager lm) {
+        if (lm instanceof LinearLayoutManager) {
+            //first = ((LinearLayoutManager) lm).findFirstVisibleItemPosition();
+            return ((LinearLayoutManager) lm).findLastVisibleItemPosition();
+        } else if (lm instanceof StaggeredGridLayoutManager) {
+            //final int[] firstPositions = ((StaggeredGridLayoutManager) lm).findFirstCompletelyVisibleItemPositions(null);
+            //Arrays.sort(firstPositions);
+            //first = firstPositions[0];
+            final int[] lastPositions = ((StaggeredGridLayoutManager) lm).findLastVisibleItemPositions(null);
+            Arrays.sort(lastPositions);
+            return lastPositions[lastPositions.length - 1];
+        } else {
+            return 0;
         }
     }
 
