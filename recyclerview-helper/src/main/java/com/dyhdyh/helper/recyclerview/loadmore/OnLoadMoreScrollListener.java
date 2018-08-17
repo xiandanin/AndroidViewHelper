@@ -22,6 +22,7 @@ public class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
     private int mEarlyCountForAutoLoad = DEFAULT_AUTOLOAD_COUNT;
     private OnLoadMoreListener mLoadMoreListener;
 
+    private OnFindVisibleItemCallback mFindCallback;
 
     public void setEarlyCountForAutoLoad(int earlyCountForAutoLoad) {
         this.mEarlyCountForAutoLoad = earlyCountForAutoLoad;
@@ -48,19 +49,26 @@ public class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
     private void callScrollLoadMore(RecyclerView recyclerView) {
         //hasMore: status of current page, means if there's more data, you have to maintain this status
         if (mLoadMoreListener != null && mLoadMoreCompleted) {
-            int first = 0, last = 0, total = 0;
+            int last = 0, total = 0;
             final RecyclerView.LayoutManager lm = recyclerView.getLayoutManager();
-            if (lm instanceof LinearLayoutManager) {
-                //first = ((LinearLayoutManager) lm).findFirstVisibleItemPosition();
-                last = ((LinearLayoutManager) lm).findLastVisibleItemPosition();
-            } else if (lm instanceof StaggeredGridLayoutManager) {
-                final int[] firstPositions = ((StaggeredGridLayoutManager) lm).findFirstCompletelyVisibleItemPositions(null);
-                Arrays.sort(firstPositions);
-                //first = firstPositions[0];
-                final int[] lastPositions = ((StaggeredGridLayoutManager) lm).findLastVisibleItemPositions(null);
-                Arrays.sort(lastPositions);
-                last = lastPositions[0];
+            //如果callback是空 就通过LayoutManager获取最后显示的索引
+            if (mFindCallback == null) {
+                if (lm instanceof LinearLayoutManager) {
+                    //first = ((LinearLayoutManager) lm).findFirstVisibleItemPosition();
+                    last = ((LinearLayoutManager) lm).findLastVisibleItemPosition();
+                } else if (lm instanceof StaggeredGridLayoutManager) {
+                    //final int[] firstPositions = ((StaggeredGridLayoutManager) lm).findFirstCompletelyVisibleItemPositions(null);
+                    //Arrays.sort(firstPositions);
+                    //first = firstPositions[0];
+                    final int[] lastPositions = ((StaggeredGridLayoutManager) lm).findLastVisibleItemPositions(null);
+                    Arrays.sort(lastPositions);
+                    last = lastPositions[lastPositions.length - 1];
+                }
+            } else {
+                //不是空就通过callback获取最后显示的索引
+                last = mFindCallback.findLastVisibleItemPosition(lm);
             }
+
             total = getItemCount(recyclerView.getAdapter());
             if (!onIntercept(recyclerView, last, total)) {
                 //earlyCountForAutoLoad: help to trigger load more listener earlier
@@ -91,5 +99,9 @@ public class OnLoadMoreScrollListener extends RecyclerView.OnScrollListener {
 
     public void setLoadMoreEnable(boolean enable) {
         this.mLoadMoreEnable = enable;
+    }
+
+    public void setOnFindVisibleItemCallback(OnFindVisibleItemCallback callback) {
+        this.mFindCallback = callback;
     }
 }

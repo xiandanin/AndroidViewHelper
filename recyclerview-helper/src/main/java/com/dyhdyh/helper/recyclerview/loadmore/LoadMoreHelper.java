@@ -31,6 +31,9 @@ public class LoadMoreHelper {
         mRecyclerView.addOnScrollListener(mScrollListener);
     }
 
+    public void setOnFindVisibleItemCallback(OnFindVisibleItemCallback callback) {
+        mScrollListener.setOnFindVisibleItemCallback(callback);
+    }
 
     public void setEarlyCountForAutoLoad(int earlyCountForAutoLoad) {
         mScrollListener.setEarlyCountForAutoLoad(earlyCountForAutoLoad);
