@@ -1,9 +1,9 @@
 package com.dyhdyh.helper.viewhelper;
 
+import android.animation.ValueAnimator;
 import android.support.annotation.ColorRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,9 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewParent;
+import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 
 import com.dyhdyh.helper.viewhelper.listener.OnNestedAppBarViewPagerListener;
+
+import java.lang.reflect.Method;
 
 /**
  * Material Design
@@ -129,24 +132,54 @@ public class DesignViewHelper {
 
 
     /**
-     * 滚动appbar
-     * 只能向上滚 不能向下滚
+     * 设置appbar偏移量
      *
      * @param appBar
-     * @param behaviorView
-     * @param dy
+     * @param offset
      */
-    public static void scrollAppBarBy(AppBarLayout appBar, View behaviorView, int dx, int dy) {
-        android.support.design.widget.CoordinatorLayout.Behavior behavior = ((android.support.design.widget.CoordinatorLayout.LayoutParams) appBar.getLayoutParams()).getBehavior();
-        if (behavior != null) {
-            ViewParent parent = appBar.getParent();
-            if (parent instanceof CoordinatorLayout) {
-                behavior.onNestedScroll((CoordinatorLayout) parent, appBar, behaviorView, dx, dy, dx, dy, ViewCompat.TYPE_TOUCH);
-                //behavior.onNestedPreScroll((CoordinatorLayout) parent,appBar,behaviorView,0,dy,new int[]{0,0});
+    public static void setAppBarLayoutOffset(AppBarLayout appBar, int offset) {
+        ViewGroup.LayoutParams params = appBar.getLayoutParams();
+        if (params instanceof CoordinatorLayout.LayoutParams) {
+            try {
+                CoordinatorLayout.Behavior behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
+                Class cls = Class.forName("android.support.design.widget.HeaderBehavior");
+                //滑到指定位置
+                Method animateOffsetTo = cls.getDeclaredMethod("setHeaderTopBottomOffset", CoordinatorLayout.class, View.class, int.class);
+                animateOffsetTo.setAccessible(true);
+                animateOffsetTo.invoke(behavior, appBar.getParent(), appBar, offset);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            if (behaviorView instanceof RecyclerView) {
-                ((RecyclerView) behaviorView).scrollToPosition(0);
+        }
+    }
+
+    /**
+     * 带动画的设置设置appbar偏移
+     *
+     * @param appBar
+     * @param offset
+     * @param duration
+     */
+    public static void setAppBarLayoutOffsetWithAnimate(AppBarLayout appBar, int offset, long duration) {
+        ViewGroup.LayoutParams params = appBar.getLayoutParams();
+        if (params instanceof CoordinatorLayout.LayoutParams) {
+            CoordinatorLayout.Behavior behavior = ((CoordinatorLayout.LayoutParams) params).getBehavior();
+            if (behavior instanceof AppBarLayout.Behavior) {
+                final int currentOffset = ((AppBarLayout.Behavior) behavior).getTopAndBottomOffset();
+
+                final ValueAnimator animator = ValueAnimator.ofInt(currentOffset, offset)
+                        .setDuration(duration);
+                animator.setInterpolator(new DecelerateInterpolator());
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        final int value = (int) animation.getAnimatedValue();
+                        setAppBarLayoutOffset(appBar, value);
+                    }
+                });
+                animator.start();
             }
+
         }
     }
 
@@ -154,12 +187,14 @@ public class DesignViewHelper {
      * appbar滚到顶
      *
      * @param appBar
-     * @param behaviorView
      */
-    public static void scrollAppBarTop(AppBarLayout appBar, View behaviorView) {
-        scrollAppBarBy(appBar, behaviorView, 0, appBar.getTotalScrollRange());
+    public static void scrollAppBarTop(AppBarLayout appBar, boolean animate) {
+        if (animate) {
+            setAppBarLayoutOffsetWithAnimate(appBar, 0, 600);
+        } else {
+            setAppBarLayoutOffset(appBar, 0);
+        }
     }
-
 
     public static void scrollToY(final NestedScrollView sv, final int y) {
         sv.post(new Runnable() {

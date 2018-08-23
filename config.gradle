@@ -5,8 +5,8 @@ ext {
                     versionCode          : 17,
                     versionName          : "1.0.0-beta16",
                     //ViewHelper版本号
-                    viewHelperVersionCode: 3,
-                    viewHelperVersionName: "1.0.2",
+                    viewHelperVersionCode: 4,
+                    viewHelperVersionName: "1.0.3",
 
                     //sdk版本
                     compileSdkVersion    : 26,
