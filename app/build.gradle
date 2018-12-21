@@ -23,18 +23,23 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:recyclerview-v7:26.1.0'
-    implementation 'com.alibaba.android:vlayout:1.2.8'
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.android.supportVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.ext.android.supportVersion"
+    implementation('com.alibaba.android:vlayout:1.2.8') {
+        exclude group: "com.android.support"
+    }
     implementation 'com.github.bumptech.glide:glide:3.7.0'
-    implementation 'com.shuyu:gsyVideoPlayer-java:2.1.1'
+
+    implementation('com.shuyu:gsyVideoPlayer-java:2.1.1') {
+        exclude group: "com.android.support"
+    }
     implementation 'com.shuyu:gsyVideoPlayer-armv7a:2.1.1'
 
     implementation "io.reactivex.rxjava2:rxjava:2.1.15"
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
 
     implementation 'com.dyhdyh.loadingbar:loadingbar:1.4.7'
-    implementation 'com.dyhdyh.rxjava:subscribers:1.0.0-beta9'
-    implementation 'com.dyhdyh.rxjava:subscribers-loadingbar:1.0.0-beta9'
+    implementation 'com.dyhdyh.rxjava:subscribers:1.0.0-beta10'
+    implementation 'com.dyhdyh.rxjava:subscribers-loadingbar:1.0.0-beta10'
     implementation project(':recyclerview-helper')
 }

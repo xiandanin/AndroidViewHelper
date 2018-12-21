@@ -5,6 +5,12 @@
     android:orientation="vertical">
 
     <Button
+        android:textAllCaps="false"
+        android:onClick="clickDesignViewHelper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DesignViewHelper" />
+    <Button
         android:onClick="clickChecked"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

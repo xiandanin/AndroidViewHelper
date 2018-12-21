@@ -86,9 +86,9 @@ public class LoadMoreActivity extends AppCompatActivity {
 
     private Observable<List<String>> asyncTestDataObservable(int page) {
         Toast.makeText(LoadMoreActivity.this, "第" + page + "页", Toast.LENGTH_SHORT).show();
-        return RxJava2Observable.async(new Function<Void, List<String>>() {
+        return RxJava2Observable.async(new Function<Object, List<String>>() {
             @Override
-            public List<String> apply(Void aVoid) throws Exception {
+            public List<String> apply(Object aVoid) throws Exception {
                 Thread.sleep(1500);
                 if (new Random().nextBoolean()) {
                     throw new Exception("随机错误");

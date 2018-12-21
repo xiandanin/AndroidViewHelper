@@ -20,6 +20,7 @@
         <activity android:name=".CheckedActivity"/>
         <activity android:name=".LoadMoreActivity"/>
         <activity android:name=".VisibleActivity"/>
+        <activity android:name=".DesignViewActivity" />
     </application>
 
 </manifest>

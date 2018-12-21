@@ -24,4 +24,8 @@ public class MainActivity extends AppCompatActivity {
     public void clickChecked(View view) {
         startActivity(new Intent(this, CheckedActivity.class));
     }
+
+    public void clickDesignViewHelper(View view) {
+        startActivity(new Intent(this, DesignViewActivity.class));
+    }
 }

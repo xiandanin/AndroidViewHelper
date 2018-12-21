@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidViewHelper.iml" filepath="$PROJECT_DIR$/AndroidViewHelper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/recyclerview-helper/recyclerview-helper.iml" filepath="$PROJECT_DIR$/recyclerview-helper/recyclerview-helper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/view-helper/view-helper.iml" filepath="$PROJECT_DIR$/view-helper/view-helper.iml" />
+    </modules>
+  </component>
+</project>
