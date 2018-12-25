@@ -1,3 +1,4 @@
 <resources>
+    <string name="app_view_name">ViewHelper</string>
     <string name="app_name">RecyclerViewHelper</string>
 </resources>

@@ -5,6 +5,8 @@ implementation 'com.dyhdyh:view-helper:1.0.3'
 ### DesignViewHelper
 Material Design相关View的辅助类
 
+<img src="screenshot/1.gif" width="200"/>
+
 ```
 //滚动AppBarLayout
 DesignViewHelper.setAppBarLayoutOffset(appBar, offsetY);

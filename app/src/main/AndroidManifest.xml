@@ -17,10 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CheckedActivity"/>
-        <activity android:name=".LoadMoreActivity"/>
-        <activity android:name=".VisibleActivity"/>
-        <activity android:name=".DesignViewActivity" />
+        <activity android:name=".CheckedActivity" />
+        <activity android:name=".LoadMoreActivity" />
+        <activity android:name=".VisibleActivity" />
+        <activity
+            android:name=".DesignViewActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:label="@string/app_view_name" />
     </application>
 
 </manifest>
