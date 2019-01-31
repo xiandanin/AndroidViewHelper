@@ -44,7 +44,7 @@ compile 'com.dyhdyh:recyclerview-helper:1.0.0-beta16'
 ```
 
 ### RecyclerViewVisibleHelper
-可以获取RecyclerView中子View的可见信息，也可以继承`AbstractViewVisibleScrollListener`
+可以获取RecyclerView中子ItemView的可见信息，也可以继承`AbstractViewVisibleScrollListener`
 
 ```
 RecyclerViewVisibleHelper mHelper = new RecyclerViewVisibleHelper(new RecyclerViewVisibleHelper.ViewVisibleCallback() {
@@ -55,6 +55,8 @@ RecyclerViewVisibleHelper mHelper = new RecyclerViewVisibleHelper(new RecyclerVi
         return itemView;
     }
 });
+
+//获取当前显示在屏幕中的ItemView可见信息，按显示百分比倒序
 final List<ViewVisibleInfo> visibleInfo = mHelper.getLocalVisibleInfo(recyclerView);
 ```
 
